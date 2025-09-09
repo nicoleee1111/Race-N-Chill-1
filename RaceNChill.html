@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Race N Chill Café</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', Arial, sans-serif;
+      background: #1C1C1C;
+      color: #F8F9FA;
+      padding-top: 90px; /* Add space for fixed navbar */
+    }
+    header {
+      background: rgba(28, 28, 28, 0.5); /* Jet Black, 50% opacity */
+      padding: 1rem 0.5rem;
+      box-shadow: 0 2px 8px #000a;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      backdrop-filter: blur(4px);
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    nav h1 {
+      display: none;
+    }
+    .logo-link {
+      display: flex;
+      align-items: center;
+      margin-right: 1rem;
+    }
+    .navbar-logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: none;
+      box-shadow: none;
+      background: none;
+      transition: none;
+    }
+    .navbar-logo:hover {
+      /* No hover effect for clean look */
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li a {
+      font-family: 'Orbitron', Arial, sans-serif;
+      color: #F8F9FA;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: color 0.2s;
+      position: relative;
+    }
+    nav ul li a:hover {
+      color: #FFD700;
+    }
+    .hero {
+  background: url('https://scontent.fmnl12-1.fna.fbcdn.net/v/t39.30808-6/473573787_122190272558042043_379165783213873466_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=110&ccb=1-7&_nc_sid=cc71e4&_nc_eui2=AeE1JwaTrefgoMQ1ICdhO29gafgJ8pl8mclp-AnymXyZyVR1c2AI4ySdgC3LfFuw88ADO3p9Lijs085W2XH879EW&_nc_ohc=XOswDFzrS8EQ7kNvwH4WcXG&_nc_oc=Adnm06bPvgUQVkZdOWsM702B0IsRCkWw5B61PkcNkkhFW9T0s9EtS3btoN9zbKNl_cM&_nc_zt=23&_nc_ht=scontent.fmnl12-1.fna&_nc_gid=vtXs3aFQ3xoVuvHPvxr2Lw&oh=00_AfaOwoZGKdEk42nXXCi79i2y3WiI7u2TMKO-w4fzhaAQ_w&oe=68C5CC87') center/cover no-repeat;
+  min-height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 80%, transparent 100%);
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(28,28,28,0.7);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem;
+    }
+    .hero-content h2 {
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-size: 2.2rem;
+      color: #FFD700;
+      text-shadow: 0 0 12px #D7263888;
+      margin-bottom: 1.5rem;
+    }
+    .hero-content p {
+      font-family: 'Poppins', Arial, sans-serif;
+      color: #F8F9FA;
+      font-size: 1.1rem;
+      margin-top: 0.5rem;
+    }
+    .hero-img {
+      display: none;
+    }
+    .menu {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+    .menu h2 {
+      font-family: 'Orbitron', Arial, sans-serif;
+      color: #D72638;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .menu-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+    }
+    .menu-item {
+      background: #222;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px #0006;
+      padding: 1rem;
+      text-align: center;
+      transition: transform 0.2s;
+      border: 1px solid #6C757D;
+    }
+    .menu-item:hover {
+      transform: scale(1.04);
+      box-shadow: 0 4px 24px #FFD70044;
+      border-color: #FFD700;
+    }
+    .menu-item img {
+      width: 100%;
+      max-width: 140px;
+      border-radius: 8px;
+      margin-bottom: 0.7rem;
+      box-shadow: 0 0 8px #D7263844;
+    }
+    .menu-item h3 {
+      font-family: 'Orbitron', Arial, sans-serif;
+      color: #FFD700;
+      font-size: 1.1rem;
+      margin: 0.5rem 0 0.3rem 0;
+    }
+    .menu-item p {
+      font-family: 'Poppins', Arial, sans-serif;
+      font-size: 0.95rem;
+      color: #6C757D;
+      margin: 0;
+    }
+    .contact {
+      background: #1C1C1C;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+    .contact h2 {
+      font-family: 'Orbitron', Arial, sans-serif;
+      color: #D72638;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .contact form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .contact input, .contact textarea {
+      font-family: 'Poppins', Arial, sans-serif;
+      padding: 0.7rem;
+      border-radius: 6px;
+      border: 1px solid #6C757D;
+      font-size: 1rem;
+      background: #222;
+      color: #F8F9FA;
+      outline: none;
+      resize: none;
+    }
+    .contact input::placeholder, .contact textarea::placeholder {
+      color: #6C757D;
+      font-family: 'Poppins', Arial, sans-serif;
+    }
+    .contact button {
+      background: linear-gradient(90deg, #D72638 60%, #FFD700 100%);
+      color: #1C1C1C;
+      font-family: 'Poppins', Arial, sans-serif;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 6px;
+      padding: 0.7rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      font-weight: bold;
+    }
+    .contact button:hover {
+      background: #FFD700;
+      color: #D72638;
+    }
+    footer {
+      background: #1C1C1C;
+      padding: 1.5rem 0 1rem 0;
+      text-align: center;
+      margin-top: 2rem;
+    }
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 0.7rem;
+    }
+    .social-icon {
+      width: 38px;
+      height: 38px;
+      display: inline-block;
+      border-radius: 50%;
+      background: #222;
+      position: relative;
+      transition: box-shadow 0.2s, background 0.2s;
+      box-shadow: 0 0 8px #FFD70044;
+    }
+    .social-icon.facebook::before {
+      content: '';
+      display: block;
+      width: 22px;
+      height: 22px;
+      background: url('https://cdn-icons-png.flaticon.com/512/733/733547.png') center/cover no-repeat;
+      position: absolute;
+      top: 8px; left: 8px;
+    }
+    .social-icon.instagram::before {
+      content: '';
+      display: block;
+      width: 22px;
+      height: 22px;
+      background: url('https://cdn-icons-png.flaticon.com/512/733/733558.png') center/cover no-repeat;
+      position: absolute;
+      top: 8px; left: 8px;
+    }
+    .social-icon.tiktok::before {
+      content: '';
+      display: block;
+      width: 22px;
+      height: 22px;
+      background: url('https://cdn-icons-png.flaticon.com/512/3046/3046121.png') center/cover no-repeat;
+      position: absolute;
+      top: 8px; left: 8px;
+    }
+    .social-icon:hover {
+      background: #FFD700;
+      box-shadow: 0 0 16px #FFD70088;
+    }
+    .social-icon {
+      font-family: 'Orbitron', Arial, sans-serif;
+    }
+    footer p {
+      color: #6C757D;
+      font-size: 0.95rem;
+      margin-top: 0.5rem;
+      font-family: 'Poppins', Arial, sans-serif;
+    }
+    @media (max-width: 700px) {
+      nav ul {
+        gap: 1rem;
+      }
+      .menu-items {
+        grid-template-columns: 1fr;
+      }
+      .hero-content h2 {
+        font-size: 1.3rem;
+      }
+      .menu h2, .contact h2 {
+        font-size: 1.3rem;
+      }
+      .navbar-logo {
+        width: 56px;
+        height: 56px;
+      }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="#home" class="logo-link">
+  <img src="https://scontent.fmnl12-1.fna.fbcdn.net/v/t39.30808-6/482050932_122197704536042043_2343527562969447110_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeGOvBoROTV8zPuK7qP1_trufy-Nt6T91RZ_L423pP3VFpGLwMmCnXOF-PeLCJftp6pFjSP_opE_coZMGhpfDNlq&_nc_ohc=dAASACYrjSEQ7kNvwGbQ_dS&_nc_oc=Adn0co7YGxLq5U31EazXo3Hq2ecIS249_dMX7ODf530XLlY7zTxalsgbmaf0Ox2ct50&_nc_zt=23&_nc_ht=scontent.fmnl12-1.fna&_nc_gid=tAUkiR_G70ojmJXDB2zwhw&oh=00_AfZsFGHX4_fs2IbmpveCcGOB_2J9NNpaXS6VTw9Ad_R_Fg&oe=68C5C64A" alt="Race N Chill Café Logo" class="navbar-logo">
+      </a>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#social">Social</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h2>Fuel your day with flavor and speed — welcome to Race N Chill Café.</h2>
+      <p>Step into Batangas’ motorsport-inspired café for coffee, comfort food, and a community that loves the thrill of the race.</p>
+    </div>
+  </section>
+
+  <section id="menu" class="menu">
+    <h2>Menu</h2>
+    <div class="menu-items">
+      <div class="menu-item">
+        <img src="https://scontent.fmnl12-1.fna.fbcdn.net/v/t39.30808-6/497577513_122207756348042043_7259001243832646639_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGggnq3R9w-H_phwguCgtMnOPulmeo3gtQ4-6WZ6jeC1AoFGifa7LMs1mnfS-MHBh5TXPZScGyEPnY8XXKJAVU4&_nc_ohc=UZCargsLQcgQ7kNvwHcOOG_&_nc_oc=AdngmWWynv6ucItr5rihzMAyUzsnlKKMq2pxTPs6FXW2uDzXz0PjtwlROGBCBoLJYkQ&_nc_zt=23&_nc_ht=scontent.fmnl12-1.fna&_nc_gid=41w8PMLCfmDQAMNbYSetDg&oh=00_Afax3MOvHvjEyc4bQBS8nLOFbUgWkeqxSw7p2eZePy07kw&oe=68C5CE01" alt="Turbo Espresso Shot">
+        <h3>Turbo Espresso Shot</h3>
+        <p>High-octane espresso for instant energy</p>
+      </div>
+      <div class="menu-item">
+        <img src="https://scontent.fmnl12-1.fna.fbcdn.net/v/t39.30808-6/527856318_122218891124042043_5797335782358336129_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHUV-kAnaKzmYb4A86qcija_dSfUJr5L9f91J9Qmvkv1zoPnJxEr8tVCi7lqsLgulfKNB8k68obGl55UgkEaj_X&_nc_ohc=FpNh3TRmSrEQ7kNvwGj6vSb&_nc_oc=AdmhIlL3JzdVH8cG4D7JffzYSiBDRhE4tlb1WRBmOx9AWCKdxMFujAxTA1CPxKi5nzs&_nc_zt=23&_nc_ht=scontent.fmnl12-1.fna&_nc_gid=LATHUT4fTS6zMjOHi7QJ1g&oh=00_Afb-yMaCanV6EPzIrrbJg_6-tr6som5SmJ4--I57YCZPWg&oe=68C5AECF" alt="Nitro Cold Brew">
+        <h3>Nitro Cold Brew</h3>
+        <p>Smooth, chilled coffee with a kick</p>
+      </div>
+      <div class="menu-item">
+        <img src="https://scontent.fmnl12-1.fna.fbcdn.net/v/t39.30808-6/481296077_122195671172042043_2375867586307419012_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeF0j21wIgD5LdZxkI4ozXJVaxVe98kqN5RrFV73ySo3lB_Bk7zMnfsIO6vgtuQjekEWvOkwAy5hgHxGxcuV9aIf&_nc_ohc=t-lc-V1MBVkQ7kNvwGWyC6J&_nc_oc=AdmWWgw5tfMEREgtWhWsBUv_dTYcrTodxzLk-MR5RwTOg82Mtxjo_oFdArHaokbpzbY&_nc_zt=23&_nc_ht=scontent.fmnl12-1.fna&_nc_gid=k_gpppDGSVi27oO9M3CzCA&oh=00_AfZWInTXaZ0mAV2ftYeK64OmeyMQTquDzJHZYixGgk212A&oe=68C5B519" alt="Pit Stop Pancakes">
+        <h3>Pit Stop Pancakes</h3>
+        <p>Fluffy stacks with syrup and butter</p>
+      </div>
+      <div class="menu-item">
+        <img src="https://scontent.fmnl12-1.fna.fbcdn.net/v/t39.30808-6/481081131_122195671232042043_517606384781589686_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGN75OOjqaJM8u4WxLicqYkVyYJNXVsraJXJgk1dWytopMHlu1tx_h0HtX-573Al-bjI-Lbo3_sMUNs9P_d291O&_nc_ohc=YdfVBJxE7fYQ7kNvwFUmRIA&_nc_oc=AdlgYVqJ2zU3ClUh0mC0Eiumk9U8XU3DTNCcMyWJTPNjlsy2Sha-hx2zurCvt_6rj0I&_nc_zt=23&_nc_ht=scontent.fmnl12-1.fna&_nc_gid=z0qQeUwhiv6Hz27WaahVcw&oh=00_Afa-0bve00W2zSxWDf7tQG7e1tHlbTLKGzJKgejk1SDeVg&oe=68C5C897" alt="Racer’s Burger">
+        <h3>Racer’s Burger</h3>
+        <p>Juicy beef patty with race-day toppings</p>
+      </div>
+      <div class="menu-item">
+        <img src="https://scontent.fmnl12-1.fna.fbcdn.net/v/t39.30808-6/494748818_122205919586042043_7501378302858923758_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeF9oyS4VVTYo3hx_Mv8N-6Fy5sZuTx0mOLLmxm5PHSY4nQYrBvY86KY7O_9pZcfvMz9ZfTxRV-IhKnaq-fFy0ST&_nc_ohc=ZyrGWntQIUsQ7kNvwHjz4gz&_nc_oc=AdmhOM26Wxc2Ot7MWlrlNRijfPY7yEt7zHxXt32lq54FK7vFUyFgrsIkgDSgAbCkCuI&_nc_zt=23&_nc_ht=scontent.fmnl12-1.fna&_nc_gid=le9FmZ8UZMuIjsn1yUJ4Pg&oh=00_AfYaYOxeZgNYQ-xG_5nDPCACctW7mRM4dODzcbD2IMau2A&oe=68C5D2CB" alt="Speedy Carbonara">
+        <h3>Speedy Carbonara</h3>
+        <p>Creamy pasta with bacon and parmesan</p>
+      </div>
+      <div class="menu-item">
+        <img src="https://scontent.fmnl12-1.fna.fbcdn.net/v/t39.30808-6/480805089_122195671556042043_9176923964997646110_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeEzQPUHHDfYM_FwpyN4CheiioImsTpHDSiKgiaxOkcNKEsDSCzl_Tjhtb_HhI2_hzH0gIS18CZCm4yJW5Rfkp7x&_nc_ohc=PmNc-Ci-qBwQ7kNvwHUt2an&_nc_oc=AdmSRT-oaMc8Gj_WnXbGpJnrk22sK0kKVO9s2sPmEKFby4r8-gdvthhwu7kzbshuGUg&_nc_zt=23&_nc_ht=scontent.fmnl12-1.fna&_nc_gid=aQmaFGeY3gAYmQ9N3ECH9g&oh=00_AfYw1Sxpn7tzOlS5kvVUlySa2hfmgP2eOsiqp3QPOx0e7Q&oe=68C5A99B" alt="Fuel-Up Fries">
+        <h3>Fuel-Up Fries</h3>
+        <p>Crispy seasoned fries with dips</p>
+      </div>
+      <div class="menu-item">
+        <img src="https://scontent.fmnl12-1.fna.fbcdn.net/v/t39.30808-6/524145411_122217719906042043_3505989387653778749_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeEJ6dG4dw6xUr_6kbh_JXi-Pw_y5RT8MCU_D_LlFPwwJeNoMoJPbXxBkUjsUb3qrg6lDT9INdwKQDzpdDnoDTfj&_nc_ohc=RdFhlzYr3FUQ7kNvwHAOvFb&_nc_oc=AdkwMpOgxFM-UYoMu3r_dx-O36UAxUXbgXHpkdu9d--RXXsBOJMUUGVuW3_tMNcCBw0&_nc_zt=23&_nc_ht=scontent.fmnl12-1.fna&_nc_gid=RvN3ZbCxRLOsat5XG7Fs_A&oh=00_AfZGn7r5CSgrQkXKqJZfcbadIHO9xspUWDzha8FrEm0MfQ&oe=68C5A8CC" alt="Trackside Tacos">
+        <h3>Trackside Tacos</h3>
+        <p>Soft shell tacos with spicy chicken</p>
+      </div>
+      <div class="menu-item">
+        <img src="https://scontent.fmnl12-1.fna.fbcdn.net/v/t39.30808-6/520537591_122216682968042043_3733929296821303914_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGPz3qH436nB7LH-8NZT3wLKrJOwy-oPfkqsk7DL6g9-V0braGM5FGOFCpQDCJGQUCjq8jiBgqYL1S2RqUqPloe&_nc_ohc=XW-g0U7y1O4Q7kNvwEWLXFU&_nc_oc=AdkFldC4CWuJTO8UAk_JkHC3OYlHI9AbQwufyOPrn9wgqdvcXsHp5KPjEOn5pB_h6iw&_nc_zt=23&_nc_ht=scontent.fmnl12-1.fna&_nc_gid=XncRmNMCfkMuEfXoyymWRw&oh=00_AfaqzHLnEcrSDMJjcLhEve8jnTC0O3S_i1bywb6Iy_sm1Q&oe=68C5CC36" alt="Overdrive Oreo Shake">
+        <h3>Overdrive Oreo Shake</h3>
+        <p>Thick shake with crushed Oreos</p>
+      </div>
+      <div class="menu-item">
+        <img src="https://scontent.fmnl12-1.fna.fbcdn.net/v/t39.30808-6/494642295_122205709106042043_6679736388718534615_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeEUthuUS4rmg5daZsYJwgs-Y6A-qU-Xn6JjoD6pT5efohMzmRr7v90sw-mIlioLW34rQE6s35-yEO-SWtrn2o7_&_nc_ohc=Q9vbWb2S4bcQ7kNvwGI44VW&_nc_oc=Adk9h9DRn2lfyqx3VZHsEaDCj3saTrbnGyULHX1scmsRfvZW_hJnSEZDnQuBZClLNUE&_nc_zt=23&_nc_ht=scontent.fmnl12-1.fna&_nc_gid=OuqTqhTdk5ByHaXqAEyP5g&oh=00_Afafao_bNM2DdDD8Z7uSdk-ZASJm7SeUEAU8nuqB0_TZ5Q&oe=68C5CBCB" alt="Chillax Iced Tea">
+        <h3>Chillax Iced Tea</h3>
+        <p>Refreshing lemon iced tea</p>
+      </div>
+      <div class="menu-item">
+        <img src="https://scontent.fmnl12-1.fna.fbcdn.net/v/t39.30808-6/481050817_122195671406042043_2783852162647995130_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHioCDGubtbGjg1lKSNj6v-FE7LvfJwRUEUTsu98nBFQd56xJ0RERtbzigT0zfsXAyA0rJV1FLJZKTuu8FLSUj3&_nc_ohc=aXnsd5oX3RMQ7kNvwFN7tYz&_nc_oc=AdnJl8_tBXEzFdfdn1IzVoUBleSbzVlV59oYJ5wbCUmkIiVDKUaZakOdTF7PSEbFveY&_nc_zt=23&_nc_ht=scontent.fmnl12-1.fna&_nc_gid=vrNH44wpKw_gWGnIj7A5jA&oh=00_AfaPBJAtxDEMb2YllEkN51Og45GcYb8nyIv7UoVNXQGN7Q&oe=68C5C257" alt="Victory Waffle Sundae">
+        <h3>Victory Waffle Sundae</h3>
+        <p>Waffle topped with ice cream and chocolate drizzle</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Name" required>
+      <input type="email" placeholder="Email" required>
+      <textarea placeholder="Message" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <footer id="social">
+    <div class="social-links">
+      <a href="https://www.facebook.com/profile.php?id=61551261294074" target="_blank" class="social-icon facebook" aria-label="Facebook"></a>
+      <a href="https://www.instagram.com/race_n_chill/" target="_blank" class="social-icon instagram" aria-label="Instagram"></a>
+      <a href="https://www.tiktok.com/@racenchill_caferesto" target="_blank" class="social-icon tiktok" aria-label="TikTok"></a>
+    </div>
+    <p>&copy; 2025 Race N Chill Café. All rights reserved.</p>
+  </footer>
+</body>
+</html>
